@@ -1,4 +1,4 @@
-package com.engineering.engineeringtechnicaltest;
+package com.engineering.technicaltest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
