@@ -24,7 +24,7 @@ public class Seller
 
 	@Column private String name;
 	
-	@Column private Integer cpf;
+	@Column private String cpf;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Client> clients;
@@ -41,7 +41,7 @@ public class Seller
 	 * @param name Name of seller
 	 * @param email Seller e-mail
 	 */
-	public Seller(Integer sellerId, String name, Integer cpf)
+	public Seller(Integer sellerId, String name, String cpf)
 	{
 		this.sellerId = sellerId;
 		this.name = name;
@@ -56,7 +56,7 @@ public class Seller
 	 * @param email Seller e-mail
 	 * @param clients Clients to be associated to a seller
 	 */
-	public Seller(Integer sellerId, String name, Integer cpf, Client clients)
+	public Seller(Integer sellerId, String name, String cpf, Client clients)
 	{
 		this.sellerId = sellerId;
 		this.name = name;
@@ -84,12 +84,12 @@ public class Seller
 		this.name = name;
 	}
 
-	public Integer getCpf()
+	public String getCpf()
 	{
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf)
+	public void setCpf(String cpf)
 	{
 		this.cpf = cpf;
 	}
