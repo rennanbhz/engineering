@@ -15,7 +15,7 @@ public class Client
 {
 	@Id @GeneratedValue private Integer clientId;
 	
-	@Column private String email;
+	@Column private String name;
 	@Column private String cpf;
 	@Column private Character gender;
 	
@@ -30,11 +30,12 @@ public class Client
 	 * @param clientId Client identificator
 	 * @param name Name of client
 	 * @param email Client e-mail
+	 * @param gender Gender of client
 	 */
-	public Client(Integer clientId, String email, String cpf, Character gender)
+	public Client(Integer clientId, String name, String cpf, Character gender)
 	{
 		this.clientId = clientId;
-		this.email = email;
+		this.name = name;
 		this.cpf = cpf;
 		this.gender = gender;
 	}
@@ -49,14 +50,14 @@ public class Client
 		this.clientId = id;
 	}
 	
-	public String getEmail()
+	public String getName()
 	{
-		return email;
+		return name;
 	}
 	
-	public void setEmail(String email)
+	public void setName(String name)
 	{
-		this.email = email;
+		this.name = name;
 	}
 	
 	public String getCpf()

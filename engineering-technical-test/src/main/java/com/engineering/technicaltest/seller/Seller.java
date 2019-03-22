@@ -53,7 +53,7 @@ public class Seller
 	 *
 	 * @param id Seller identificator
 	 * @param name Name of seller
-	 * @param email Seller e-mail
+	 * @param cpf Seller CPF
 	 * @param clients Clients to be associated to a seller
 	 */
 	public Seller(Integer sellerId, String name, String cpf, Client clients)

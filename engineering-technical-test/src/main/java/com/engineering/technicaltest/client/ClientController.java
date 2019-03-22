@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.engineering.technicaltest.seller.Seller;
 import com.engineering.technicaltest.seller.SellerRepository;
+import com.engineering.technicaltest.util.ValidatorUtils;
 
 /**
  * Class responsible for exposing Client Rest operations.
@@ -39,6 +40,15 @@ public class ClientController
 	{
 		Client createdClient = clientRepository.save(client);
 		
+		try
+		{
+			if (ValidatorUtils.isValidCPF(createdClient.getCpf()) && ValidatorUtils.isValidName(createdClient.getName()));
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 		return ResponseEntity.ok(createdClient);
 	}
 	
@@ -56,7 +66,7 @@ public class ClientController
 		
 		return clientList;
 	}
-	
+		
 	/**
 	 * Gets the client information by its identifier
 	 * 
@@ -77,16 +87,30 @@ public class ClientController
 	}
 	
 	/**
+	 * Search for Client list using seller Id as filter
+	 * 
+	 * @param sellerId seller identificator
+	 * @return List of clients
+	 */
+	@GetMapping("/client/seller/{sellerId}")
+	public List<Client> searchForSellerIdfilter(@PathVariable Integer sellerId)
+	{
+		Optional<Seller> seller = sellerRepository.findById(sellerId);
+		
+		return seller.get().getClientList();
+	}
+	
+	/**
 	 * Associates seller with clients
 	 * 
 	 * @param client Client to be associated 
 	 * @param clientId client identificator
 	 * @return status OK
 	 */
-	@PutMapping("/client/seller/{sellerId}")
-	public ResponseEntity<Object> associateClientToSeller(@RequestBody Client client, @PathVariable Integer clientId)
+	@PutMapping("/seller/client{clientId}")
+	public ResponseEntity<Object> associateClientToSeller(@RequestBody Client client, @PathVariable Integer sellerId)
 	{
-		Optional<Seller> seller = sellerRepository.findById(clientId);
+		Optional<Seller> seller = sellerRepository.findById(sellerId);
 		
 		if (!seller.isPresent()) 
 		{

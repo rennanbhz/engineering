@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "435fc239-976e-47fc-9e95-95b755c880c0",
+		"name": "Technical Test Engineering",
+		"description": "Collection created to validate the API for the technical test of the Banco Inter.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pré requisitos",
+			"item": [
+				{
+					"name": "Configure global variables",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a45dffcc-f606-45da-a2f9-d2a9fc3b807c",
+								"exec": [
+									"pm.globals.clear();",
+									"pm.globals.set(\"HOST\", \"localhost\");",
+									"pm.globals.set(\"PORT\", \"8080\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{HOST}}:{{PORT}}/client/",
+							"protocol": "http",
+							"host": [
+								"{{HOST}}"
+							],
+							"port": "{{PORT}}",
+							"path": [
+								"client",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Executions necessary for the environment to work properly"
+		},
+		{
+			"name": "Create a new Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "263d199d-2325-45e8-baf0-32a339b4df78",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);",
+							"",
+							"let clientId = pm.response.json().id;",
+							"pm.globals.set(\"CLIENT_ID\", clientId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"João da Silva\",\n    \"cpf\": \"000.600.600.50\",\n    \"gender\": \"m\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						""
+					]
+				},
+				"description": "Create a new User"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtain all Clients",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d28e6881-e626-4b89-8269-580af8d82f93",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						""
+					]
+				},
+				"description": "Get all registered users in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieves Client by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d28e6881-e626-4b89-8269-580af8d82f93",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/{{CLIENT_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						"{{CLIENT_ID}}"
+					]
+				},
+				"description": "Obtain the user by its identifier"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Client by Seller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ffee2fcb-9f61-4348-b863-858b79116936",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/seller/{{SELLER_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						"seller",
+						"{{SELLER_ID}}"
+					]
+				},
+				"description": "Get Unique Digits by User"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "28ceaaa7-9a2a-4a26-b503-d67983f43dcf",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{CLIENTO_ID}},\n    \"name\": \"João Ferreira da Silva\",\n    \"cpf\": \"000.600.600.50\",\n    \"gender\": \"m\",\n    \"clientList\":[]\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/{{CLIENT_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						"{{CLIENT_ID}}"
+					]
+				},
+				"description": "Update user information"
+			},
+			"response": []
+		},
+		{
+			"name": "Associate Seller with Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ed7b368-246d-4255-a699-4a719f780e49",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{CLIENT_ID}}\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/client{{CLIENT_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						"client{{CLIENT_ID}}"
+					]
+				},
+				"description": "Associate a unique digit with a user already registered"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "991f7445-411d-4d26-8106-7b744b380865",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/client/{{CLIENT_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"client",
+						"{{CLIENT_ID}}"
+					]
+				},
+				"description": "Deletes a user in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new Seller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "263d199d-2325-45e8-baf0-32a339b4df78",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);",
+							"",
+							"let sellerId = pm.response.json().id;",
+							"pm.globals.set(\"SELLER_ID\", sellerId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"José Almeida\",\n    \"cpf\": \"120.200.20.30\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						""
+					]
+				},
+				"description": "Create a new User"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtain all Sellers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d28e6881-e626-4b89-8269-580af8d82f93",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						""
+					]
+				},
+				"description": "Get all registered users in the database"
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieves Seller by Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d28e6881-e626-4b89-8269-580af8d82f93",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/{{SELLER_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						"{{SELLER_ID}}"
+					]
+				},
+				"description": "Obtain the user by its identifier"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Seller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "28ceaaa7-9a2a-4a26-b503-d67983f43dcf",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{SELLER_ID}},\n    \"name\": \"Jose Ferreira\",\n    \"cpf\": \"120.300.500.50\"\n}"
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/{{SELLER_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						"{{SELLER_ID}}"
+					]
+				},
+				"description": "Update user information"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Seller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "991f7445-411d-4d26-8106-7b744b380865",
+						"exec": [
+							"pm.test(\"Should be successful\",  pm.response.to.be.success);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{HOST}}:{{PORT}}/seller/{{SELLER_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST}}"
+					],
+					"port": "{{PORT}}",
+					"path": [
+						"seller",
+						"{{SELLER_ID}}"
+					]
+				},
+				"description": "Deletes a user in the database"
+			},
+			"response": []
+		}
+	]
+}
