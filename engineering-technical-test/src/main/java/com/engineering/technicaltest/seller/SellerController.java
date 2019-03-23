@@ -40,7 +40,7 @@ public class SellerController
 		
 		try
 		{
-			if (ValidatorUtils.isValidCPF(createdSeller.getCpf()) && ValidatorUtils.isValidName(createdSeller.getName()));
+			if (ValidatorUtils.isValidCPF(createdSeller.getCpf()) & ValidatorUtils.isValidName(createdSeller.getName()));
 		} 
 		catch (Exception e)
 		{

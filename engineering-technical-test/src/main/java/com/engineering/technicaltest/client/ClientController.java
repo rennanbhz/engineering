@@ -42,7 +42,7 @@ public class ClientController
 		
 		try
 		{
-			if (ValidatorUtils.isValidCPF(createdClient.getCpf()) && ValidatorUtils.isValidName(createdClient.getName()));
+			if (ValidatorUtils.isValidCPF(createdClient.getCpf()) & ValidatorUtils.isValidName(createdClient.getName()));
 		} 
 		catch (Exception e)
 		{
